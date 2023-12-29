@@ -22,22 +22,23 @@
 ```
 
 ```
-curl --location --request DELETE 'localhost:8083/connectors/JdbcSinkConnectorConnector_0' \
+curl --location 'localhost:8083/connectors/' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "name": "inventory-connectorAll2",
+    "name": "inventory_connectorAll",
     "config": {
         "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector", 
         "database.hostname": "master.node.local", 
         "database.port": "32433", 
         "database.user": "sa", 
         "database.password": "Sa123@@@", 
-        "database.names": "ATM.AssetManagement.Repli", 
+        "database.names": "KafkaSourceDatabase", 
         "topic.prefix": "db_distibutted", 
         "schema.history.internal.kafka.bootstrap.servers": "broker:29092", 
         "schema.history.internal.kafka.topic": "schemahistory.db_distibutted",
-        "database.encrypt":false
+        "database.encrypt":false,
+        "connection.charset": "UTF-8"
     }
 }'
 ```
