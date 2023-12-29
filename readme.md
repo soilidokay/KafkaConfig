@@ -2,7 +2,8 @@
 
 # source connetor
 # https://github.com/debezium/debezium
-```{
+```
+{
     "name": "inventory_connectorAll",
     "config": {
         "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector", 
@@ -17,9 +18,11 @@
         "database.encrypt":false,
         "connection.charset": "UTF-8"
     }
-}```
+}
+```
 
-```curl --location --request DELETE 'localhost:8083/connectors/JdbcSinkConnectorConnector_0' \
+```
+curl --location --request DELETE 'localhost:8083/connectors/JdbcSinkConnectorConnector_0' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -36,11 +39,13 @@
         "schema.history.internal.kafka.topic": "schemahistory.db_distibutted",
         "database.encrypt":false
     }
-}'```
+}'
+```
 
 # Sink connector
 # https://github.com/confluentinc/kafka-connect-jdbc/tree/master
-```{
+```
+{
   "name": "JdbcSinkConnectorConnector_0",
   "config": {
     "tasks.max": "1",  
@@ -71,9 +76,11 @@
     "key.converter.encoding": "UTF-8",
     "value.converter.encoding": "UTF-8"
   }
-}```
+}
+```
 
-```curl --location 'localhost:8083/connectors/' \
+```
+curl --location 'localhost:8083/connectors/' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -107,7 +114,8 @@
     "key.converter.encoding": "UTF-8",
     "value.converter.encoding": "UTF-8"
   }
-}'```
+}'
+```
 
 # modify jar
 + jar xf debezium-connector-sqlserver-2.5.0.Final.jar
