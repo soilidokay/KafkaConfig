@@ -2,7 +2,7 @@
 
 # source connetor
 # https://github.com/debezium/debezium
-{
+```{
     "name": "inventory_connectorAll",
     "config": {
         "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector", 
@@ -17,9 +17,9 @@
         "database.encrypt":false,
         "connection.charset": "UTF-8"
     }
-}
+}```
 
-curl --location --request DELETE 'localhost:8083/connectors/JdbcSinkConnectorConnector_0' \
+```curl --location --request DELETE 'localhost:8083/connectors/JdbcSinkConnectorConnector_0' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -36,11 +36,11 @@ curl --location --request DELETE 'localhost:8083/connectors/JdbcSinkConnectorCon
         "schema.history.internal.kafka.topic": "schemahistory.db_distibutted",
         "database.encrypt":false
     }
-}'
+}'```
 
 # Sink connector
 # https://github.com/confluentinc/kafka-connect-jdbc/tree/master
-{
+```{
   "name": "JdbcSinkConnectorConnector_0",
   "config": {
     "tasks.max": "1",  
@@ -71,9 +71,9 @@ curl --location --request DELETE 'localhost:8083/connectors/JdbcSinkConnectorCon
     "key.converter.encoding": "UTF-8",
     "value.converter.encoding": "UTF-8"
   }
-}
+}```
 
-curl --location 'localhost:8083/connectors/' \
+```curl --location 'localhost:8083/connectors/' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -107,17 +107,14 @@ curl --location 'localhost:8083/connectors/' \
     "key.converter.encoding": "UTF-8",
     "value.converter.encoding": "UTF-8"
   }
-}'
+}'```
 
 # modify jar
-jar xf debezium-connector-sqlserver-2.5.0.Final.jar
-
-jar cf debezium-connector-sqlserver-2.5.0.Final.jar -C ../extract2 .
-setx /m JAVA_HOME "C:\Program Files\OpenJDK\jdk-21.0.1"
-
-
-jar xf kafka-connect-jdbc-10.7.4.jar
-jar cf kafka-connect-jdbc-10.7.4.jar -C ../confluent-sink .
++ jar xf debezium-connector-sqlserver-2.5.0.Final.jar
++ jar cf debezium-connector-sqlserver-2.5.0.Final.jar -C ../extract2 .
++ setx /m JAVA_HOME "C:\Program Files\OpenJDK\jdk-21.0.1"
++ jar xf kafka-connect-jdbc-10.7.4.jar
++ jar cf kafka-connect-jdbc-10.7.4.jar -C ../confluent-sink .
 
 # note
 
@@ -129,14 +126,14 @@ jar cf kafka-connect-jdbc-10.7.4.jar -C ../confluent-sink .
   + build file available in build folder
 ## Microsoft SQL Server Source (JDBC) (Sink)
 - not support unicode.
-+ https://github.com/confluentinc/kafka-connect-jdbc
-+ fix in file SqlServerDatabaseDialect.java at protected String getSqlType(SinkRecordField field)
-+ fixed case STRING:
-        if (field.isPrimaryKey()) {
-          // Should be no more than 900 which is the MSSQL constraint
-          return "nvarchar(900)";
-        } else {
-          return "nvarchar(max)";
-        }
-+ build file available in build folder
+  + https://github.com/confluentinc/kafka-connect-jdbc
+  + fix in file SqlServerDatabaseDialect.java at protected String getSqlType(SinkRecordField field)
+  + fixed case STRING:
+          if (field.isPrimaryKey()) {
+            // Should be no more than 900 which is the MSSQL constraint
+            return "nvarchar(900)";
+          } else {
+            return "nvarchar(max)";
+          }
+  + build file available in build folder
 
