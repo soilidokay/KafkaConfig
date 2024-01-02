@@ -111,7 +111,6 @@ curl --location 'localhost:8083/connectors/' \
   }
 }'
 ```
-
 # modify jar
 + jar xf debezium-connector-sqlserver-2.5.0.Final.jar
 + jar cf debezium-connector-sqlserver-2.5.0.Final.jar -C ../extract2 .
