@@ -55,21 +55,18 @@ curl --location --request DELETE 'localhost:8083/connectors/JdbcSinkConnectorCon
     "pk.mode": "record_key",
     "pk.fields": "Kafka_Id",
     "auto.create": "true",
-    "dialect.name": "SqlServerDatabaseDialect",
+    "auto.evolve": "true",
 
     "transforms":"topicToTable,unwrap",
 
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "false",
+    "delete.handling​.mode": "none",
 
     "transforms.topicToTable.type": "org.apache.kafka.connect.transforms.RegexRouter",
     "transforms.topicToTable.regex": ".*\\.(.*)",
     "transforms.topicToTable.replacement": "$1",
-    "table.name.format": "${topic}",
-    
-    "key.converter.schemas.enable": "true",
-    "value.converter.schemas.enable": "true",
-    "key.converter.encoding": "UTF-8",
-    "value.converter.encoding": "UTF-8"
+    "table.name.format": "${topic}"
   }
 }
 
@@ -91,20 +88,17 @@ curl --location 'localhost:8083/connectors/' \
     "pk.mode": "record_key",
     "pk.fields": "Kafka_Id",
     "auto.create": "true",
-    "dialect.name": "SqlServerDatabaseDialect",
+    "auto.evolve": "true",
 
     "transforms":"topicToTable,unwrap",
 
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "false",
+    "delete.handling​.mode": "none",
 
     "transforms.topicToTable.type": "org.apache.kafka.connect.transforms.RegexRouter",
     "transforms.topicToTable.regex": ".*\\.(.*)",
     "transforms.topicToTable.replacement": "$1",
-    "table.name.format": "${topic}",
-    
-    "key.converter.schemas.enable": "true",
-    "value.converter.schemas.enable": "true",
-    "key.converter.encoding": "UTF-8",
-    "value.converter.encoding": "UTF-8"
+    "table.name.format": "${topic}"
   }
 }'
